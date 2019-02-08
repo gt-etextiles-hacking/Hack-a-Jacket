@@ -16,6 +16,7 @@ struct JSConstants {
         case cover
         case scratch
         case undefined
+        case undetected
     }
     
     struct JSStrings {

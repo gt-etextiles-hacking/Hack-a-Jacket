@@ -71,6 +71,7 @@ class ViewController: UIViewController {
         isButtonToConnect == true ? centralManager = CBCentralManager(delegate: self, queue: nil) : centralManager.cancelPeripheralConnection(peripheralObject)
     }
     
+//    event handler for the top right toggle between "See Gestures" and "See Threads"
     @objc func addTapped (sender:UIButton) {
         centralManager.cancelPeripheralConnection(peripheralObject)
         if seeThreads {
@@ -115,6 +116,7 @@ extension ViewController: CBCentralManagerDelegate {
         case .poweredOn:
             print("Powered On")
             
+            // helper function (1/2) call for finding the UUID for a new user
 //            centralManager.scanForPeripherals(withServices: [], options: nil) // CBUUID.init(nsuuid: uuid!)
             peripheralList = centralManager.retrievePeripherals(withIdentifiers: [uuid!])
             peripheralObject = peripheralList[0]
@@ -125,6 +127,7 @@ extension ViewController: CBCentralManagerDelegate {
         }
     }
     
+    // helper function (2/2) for finding the UUID for a new user
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
         print("UUID(s) found: \(peripheral.name) - \(peripheral.identifier.uuidString)")
     }
@@ -182,38 +185,48 @@ extension ViewController: CBPeripheralDelegate {
     }
     
     func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
+            // some async process?
             DispatchQueue.main.async() {
                 if characteristic.uuid.uuidString == "D45C2010-4270-A125-A25D-EE458C085001" {
                     self.label.text = self.findThread(from: characteristic)
                 }
             }
-            let gestureString = bodyLocation(from: characteristic)
-            if seeThreads == false {
-                label.text = gestureString
+        
+            if seeThreads == true {
+                return
             }
-            if gestureString == HAJString.hajGestureCover && seeThreads == false {
-                let dataval2 = dataWithHexString(hex: "801308001008181bda060a0800100030003800")
-                let dataval3 = dataWithHexString(hex: "414001")
-                peripheral.writeValue(dataval2, for: glowCharacteristic, type: .withoutResponse)
-                peripheral.writeValue(dataval3, for: glowCharacteristic, type: .withoutResponse)
-            } else if gestureString == HAJString.hajGestureBrushOut && seeThreads == false {
-                let numberString = "6179810873"
-                if let url = URL(string: "telprompt://\(numberString)"), UIApplication.shared.canOpenURL(url) {
-                    if #available(iOS 10, *) {
-                        UIApplication.shared.open(url)
-                    } else {
-                        UIApplication.shared.openURL(url)
-                    }
-                }
-            } else if gestureString == HAJString.hajGestureBrushIn && seeThreads == false {
-                if (MFMessageComposeViewController.canSendText()) {
-                    let controller = MFMessageComposeViewController()
-                    controller.body = "Message Body"
-                    controller.recipients = ["6179810873"]
-                    controller.messageComposeDelegate = self
-                    self.present(controller, animated: true, completion: nil)
-                }
+            let gestureString = decodeGesture(from: characteristic)
+            label.text = gestureString
+        
+            // 4, 5, or 6 Response: Glow
+            if gestureString == HAJString.hajGestureUndefined {
+                // convert every 2 hex values to 1 byte
+                let dataval2 = dataWithHexString(hex: "801308001008180BDA060A0810107830013801") // 19 bytes
+                let dataval3 = dataWithHexString(hex: "414000") // 3 bytes: 1000001 1000000 0000000
+                peripheralObject.writeValue(dataval2, for: glowCharacteristic, type: .withoutResponse)
+                peripheralObject.writeValue(dataval3, for: glowCharacteristic, type: .withoutResponse)
+                
+            // Brush out Response
             }
+//            else if gestureString == HAJString.hajGestureBrushOut {
+//                let numberString = "6179810873"
+//                if let url = URL(string: "telprompt://\(numberString)"), UIApplication.shared.canOpenURL(url) {
+//                    if #available(iOS 10, *) {
+//                        UIApplication.shared.open(url)
+//                    } else {
+//                        UIApplication.shared.openURL(url)
+//                    }
+//                }
+//            // Brush in Response
+//            } else if gestureString == HAJString.hajGestureBrushIn {
+//                if (MFMessageComposeViewController.canSendText()) {
+//                    let controller = MFMessageComposeViewController()
+//                    controller.body = "Message Body"
+//                    controller.recipients = ["6179810873"]
+//                    controller.messageComposeDelegate = self
+//                    self.present(controller, animated: true, completion: nil)
+//                }
+//            }
     }
     
     func dataWithHexString(hex: String) -> Data {
@@ -238,22 +251,23 @@ extension ViewController: CBPeripheralDelegate {
         return partStr
     }
     
-    private func bodyLocation(from characteristic: CBCharacteristic) -> String {
+    // gestures are encoded with 9 status codes, this function resolves their designated names
+    private func decodeGesture(from characteristic: CBCharacteristic) -> String {
         guard let characteristicData = characteristic.value,
             let byte = characteristicData.first else { return "Error" }
         
         switch byte {
-        case 0: return HAJString.hajGestureUndefined
+        case 0: return HAJString.hajGestureUndetected
         case 1: return HAJString.hajGestureDoubleTap
         case 2: return HAJString.hajGestureBrushIn
         case 3: return HAJString.hajGestureBrushOut
-        case 4: return HAJString.hajGestureUndefined
-        case 5: return HAJString.hajGestureUndefined
-        case 6: return HAJString.hajGestureUndefined
+        case 4: return "4 \(HAJString.hajGestureUndefined)"
+        case 5: return "5 \(HAJString.hajGestureUndefined)"
+        case 6: return "6 \(HAJString.hajGestureUndefined)"
         case 7: return HAJString.hajGestureCover
         case 8: return HAJString.hajGestureScratch
         default:
-            return HAJString.hajGestureUndefined
+            return HAJString.hajGestureUndetected
         }
     }
 
