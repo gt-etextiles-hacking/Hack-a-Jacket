@@ -1,0 +1,24 @@
+PODS:
+  - JacquardToolkit (1.0.9)
+  - PureLayout (3.1.4)
+  - SwiftyButton (0.8.2)
+
+DEPENDENCIES:
+  - JacquardToolkit
+  - PureLayout
+  - SwiftyButton
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - JacquardToolkit
+    - PureLayout
+    - SwiftyButton
+
+SPEC CHECKSUMS:
+  JacquardToolkit: 168c17101a795220cdca6bef5df11991d1dadd76
+  PureLayout: f08c01b8dec00bb14a1fefa3de4c7d9c265df85e
+  SwiftyButton: 5b0ef314e9cf61cf8a83e456ddd1ea1f53f30598
+
+PODFILE CHECKSUM: b9c28e46e31df00b9470b8c613552d0f99163eea
+
+COCOAPODS: 1.5.3

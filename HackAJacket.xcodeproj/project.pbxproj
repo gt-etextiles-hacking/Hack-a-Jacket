@@ -1,0 +1,434 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0D187D22C15D6555544559B7 /* Pods_HackAJacket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F4EBD44518CF4AAE782348F /* Pods_HackAJacket.framework */; };
+		8222F924219CC9B000513426 /* HAJString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8222F923219CC9B000513426 /* HAJString.swift */; };
+		82289753217E256B004A2000 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82289752217E256B004A2000 /* AppDelegate.swift */; };
+		82289755217E256B004A2000 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82289754217E256B004A2000 /* ViewController.swift */; };
+		8228975B217E256B004A2000 /* HackAJacket.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 82289759217E256B004A2000 /* HackAJacket.xcdatamodeld */; };
+		8228975D217E256D004A2000 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8228975C217E256D004A2000 /* Assets.xcassets */; };
+		82289760217E256D004A2000 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8228975E217E256D004A2000 /* LaunchScreen.storyboard */; };
+		82719B3B2187828E007CA098 /* HAJColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82719B3A2187828E007CA098 /* HAJColor.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		3F4EBD44518CF4AAE782348F /* Pods_HackAJacket.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HackAJacket.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8222F923219CC9B000513426 /* HAJString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HAJString.swift; sourceTree = "<group>"; };
+		8228974F217E256B004A2000 /* HackAJacket.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HackAJacket.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		82289752217E256B004A2000 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		82289754217E256B004A2000 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		8228975A217E256B004A2000 /* HackAJacket.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = HackAJacket.xcdatamodel; sourceTree = "<group>"; };
+		8228975C217E256D004A2000 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		8228975F217E256D004A2000 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		82289761217E256D004A2000 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		82719B3A2187828E007CA098 /* HAJColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HAJColor.swift; sourceTree = "<group>"; };
+		AE8AAEDD29391DE9F0C51391 /* Pods-HackAJacket.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HackAJacket.release.xcconfig"; path = "Pods/Target Support Files/Pods-HackAJacket/Pods-HackAJacket.release.xcconfig"; sourceTree = "<group>"; };
+		FCAD60E976FACC264BC427EE /* Pods-HackAJacket.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HackAJacket.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HackAJacket/Pods-HackAJacket.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8228974C217E256B004A2000 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0D187D22C15D6555544559B7 /* Pods_HackAJacket.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3570E1A77302FC3423619715 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3F4EBD44518CF4AAE782348F /* Pods_HackAJacket.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		589999C46F4552668D489649 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				FCAD60E976FACC264BC427EE /* Pods-HackAJacket.debug.xcconfig */,
+				AE8AAEDD29391DE9F0C51391 /* Pods-HackAJacket.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		82289746217E256B004A2000 = {
+			isa = PBXGroup;
+			children = (
+				82289751217E256B004A2000 /* HackAJacket */,
+				82289750217E256B004A2000 /* Products */,
+				589999C46F4552668D489649 /* Pods */,
+				3570E1A77302FC3423619715 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		82289750217E256B004A2000 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8228974F217E256B004A2000 /* HackAJacket.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		82289751217E256B004A2000 /* HackAJacket */ = {
+			isa = PBXGroup;
+			children = (
+				82289752217E256B004A2000 /* AppDelegate.swift */,
+				82289754217E256B004A2000 /* ViewController.swift */,
+				8228975C217E256D004A2000 /* Assets.xcassets */,
+				8228975E217E256D004A2000 /* LaunchScreen.storyboard */,
+				82289761217E256D004A2000 /* Info.plist */,
+				82289759217E256B004A2000 /* HackAJacket.xcdatamodeld */,
+				82719B3A2187828E007CA098 /* HAJColor.swift */,
+				8222F923219CC9B000513426 /* HAJString.swift */,
+			);
+			path = HackAJacket;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8228974E217E256B004A2000 /* HackAJacket */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 82289764217E256D004A2000 /* Build configuration list for PBXNativeTarget "HackAJacket" */;
+			buildPhases = (
+				6AE340636D5D19DA6488C57C /* [CP] Check Pods Manifest.lock */,
+				8228974B217E256B004A2000 /* Sources */,
+				8228974C217E256B004A2000 /* Frameworks */,
+				8228974D217E256B004A2000 /* Resources */,
+				EB604A5149D4974AABEA1557 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = HackAJacket;
+			productName = HackAJacket;
+			productReference = 8228974F217E256B004A2000 /* HackAJacket.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		82289747217E256B004A2000 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1000;
+				LastUpgradeCheck = 1000;
+				ORGANIZATIONNAME = "Aayush Kumar";
+				TargetAttributes = {
+					8228974E217E256B004A2000 = {
+						CreatedOnToolsVersion = 10.0;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
+					};
+				};
+			};
+			buildConfigurationList = 8228974A217E256B004A2000 /* Build configuration list for PBXProject "HackAJacket" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 82289746217E256B004A2000;
+			productRefGroup = 82289750217E256B004A2000 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8228974E217E256B004A2000 /* HackAJacket */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8228974D217E256B004A2000 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				82289760217E256D004A2000 /* LaunchScreen.storyboard in Resources */,
+				8228975D217E256D004A2000 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		6AE340636D5D19DA6488C57C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-HackAJacket-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EB604A5149D4974AABEA1557 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-HackAJacket/Pods-HackAJacket-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/JacquardToolkit/JacquardToolkit.framework",
+				"${BUILT_PRODUCTS_DIR}/PureLayout/PureLayout.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyButton/SwiftyButton.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JacquardToolkit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PureLayout.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyButton.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HackAJacket/Pods-HackAJacket-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8228974B217E256B004A2000 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8222F924219CC9B000513426 /* HAJString.swift in Sources */,
+				82719B3B2187828E007CA098 /* HAJColor.swift in Sources */,
+				82289755217E256B004A2000 /* ViewController.swift in Sources */,
+				8228975B217E256B004A2000 /* HackAJacket.xcdatamodeld in Sources */,
+				82289753217E256B004A2000 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		8228975E217E256D004A2000 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8228975F217E256D004A2000 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		82289762217E256D004A2000 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		82289763217E256D004A2000 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		82289765217E256D004A2000 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FCAD60E976FACC264BC427EE /* Pods-HackAJacket.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = ZXTL3R22PT;
+				INFOPLIST_FILE = HackAJacket/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.aayushkumar.HackAJacket;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		82289766217E256D004A2000 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AE8AAEDD29391DE9F0C51391 /* Pods-HackAJacket.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = ZXTL3R22PT;
+				INFOPLIST_FILE = HackAJacket/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.aayushkumar.HackAJacket;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		8228974A217E256B004A2000 /* Build configuration list for PBXProject "HackAJacket" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				82289762217E256D004A2000 /* Debug */,
+				82289763217E256D004A2000 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		82289764217E256D004A2000 /* Build configuration list for PBXNativeTarget "HackAJacket" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				82289765217E256D004A2000 /* Debug */,
+				82289766217E256D004A2000 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		82289759217E256B004A2000 /* HackAJacket.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				8228975A217E256B004A2000 /* HackAJacket.xcdatamodel */,
+			);
+			currentVersion = 8228975A217E256B004A2000 /* HackAJacket.xcdatamodel */;
+			path = HackAJacket.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 82289747217E256B004A2000 /* Project object */;
+}
