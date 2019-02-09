@@ -74,15 +74,9 @@ class ViewController: UIViewController {
 //    event handler for the top right toggle between "See Gestures" and "See Threads"
     @objc func addTapped (sender:UIButton) {
         centralManager.cancelPeripheralConnection(peripheralObject)
-        if seeThreads {
-            let rightAddBarButtonItem = UIBarButtonItem(title: "See Threads", style: UIBarButtonItem.Style.plain, target: self, action: #selector(ViewController.addTapped))
-            seeThreads = false
-            navigationItem.setRightBarButton(rightAddBarButtonItem, animated: true)
-        } else {
-            let rightAddBarButtonItem = UIBarButtonItem(title: "See Gestures", style: UIBarButtonItem.Style.plain, target: self, action: #selector(ViewController.addTapped))
-            seeThreads = true
-            navigationItem.setRightBarButton(rightAddBarButtonItem, animated: true)
-        }
+        let rightAddBarButtonItem = seeThreads ? UIBarButtonItem(title: "See Threads", style: UIBarButtonItem.Style.plain, target: self, action: #selector(ViewController.addTapped)) : UIBarButtonItem(title: "See Gestures", style: UIBarButtonItem.Style.plain, target: self, action: #selector(ViewController.addTapped))
+        seeThreads = !seeThreads
+        navigationItem.setRightBarButton(rightAddBarButtonItem, animated: true)
         centralManager = CBCentralManager(delegate: self, queue: nil)
     }
     
@@ -167,19 +161,17 @@ extension ViewController: CBPeripheralDelegate {
         guard let characteristics = service.characteristics else { return }
         
         for characteristic in characteristics {
-            if characteristic.uuid.uuidString == HAJString.hajJacketUUID {
+            
+            if characteristic.uuid.uuidString == HAJString.hajJacketUUID ||
+                (characteristic.uuid.uuidString == "D45C2030-4270-A125-A25D-EE458C085001" && seeThreads == false) ||
+                (characteristic.uuid.uuidString == "D45C2010-4270-A125-A25D-EE458C085001" && seeThreads == true)
+            {
                 peripheral.setNotifyValue(true, for: characteristic)
             }
+            
             if characteristic.properties.contains(.writeWithoutResponse) {
                 print("\(characteristic.uuid): properties contains .writeWithResponse")
                 glowCharacteristic = characteristic
-            }
-            
-            if characteristic.uuid.uuidString == "D45C2030-4270-A125-A25D-EE458C085001" && seeThreads == false {
-                peripheral.setNotifyValue(true, for: characteristic)
-            }
-            if characteristic.uuid.uuidString == "D45C2010-4270-A125-A25D-EE458C085001" && seeThreads == true {
-                peripheral.setNotifyValue(true, for: characteristic)
             }
         }
     }
