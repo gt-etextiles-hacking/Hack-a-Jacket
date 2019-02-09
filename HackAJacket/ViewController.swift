@@ -201,8 +201,8 @@ extension ViewController: CBPeripheralDelegate {
             // 4, 5, or 6 Response: Glow
             if gestureString == HAJString.hajGestureUndefined {
                 // convert every 2 hex values to 1 byte
-                let dataval2 = dataWithHexString(hex: "801308001008180BDA060A0810107830013801") // 19 bytes
-                let dataval3 = dataWithHexString(hex: "414000") // 3 bytes: 1000001 1000000 0000000
+                let dataval2 = dataWithHexString(hex: "801308001008180BDA060A0810107830013801") // 19 bytes, 152 bits
+                let dataval3 = dataWithHexString(hex: "414000") // 3 bytes, 24 bits: 1000001 1000000 0000000
                 peripheralObject.writeValue(dataval2, for: glowCharacteristic, type: .withoutResponse)
                 peripheralObject.writeValue(dataval3, for: glowCharacteristic, type: .withoutResponse)
                 
