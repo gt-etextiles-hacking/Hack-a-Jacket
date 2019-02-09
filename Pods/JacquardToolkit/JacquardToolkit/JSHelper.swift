@@ -25,7 +25,7 @@ class JSHelper {
         case 7: return JSConstants.JSGestures.cover
         case 8: return JSConstants.JSGestures.scratch
         default:
-            return JSConstants.JSGestures.undefined
+            return JSConstants.JSGestures.undetected
         }
     }
     
