@@ -15,6 +15,8 @@ import MessageUI
 import MediaPlayer
 
 class ViewController: UIViewController {
+    
+    
 
     let label = UILabel()
     let connectButton = PressableButton()
@@ -29,6 +31,7 @@ class ViewController: UIViewController {
     var seeThreads = true
     var loggingThreadReadings = false
     var glowCharacteristic: CBCharacteristic!
+    var csvText = "ThreadReading"
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -83,7 +86,30 @@ class ViewController: UIViewController {
     
     @objc func loggingToggleHandler (sender:UIButton) {
         
+        // change read/write of csv
+        if (!loggingThreadReadings) {
+            csvText.removeAll()
+            csvText.append("ThreadReadings\n")
+//            print(csvText)
+        } else {
+            print("saving csv?")
+
+            let fileName = "data.csv"
+            let path = NSURL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(fileName)
+            
+            do {
+                try csvText.write(to: path!, atomically: true, encoding: String.Encoding.utf8)
+                self.sendMail(dataURL: path!)
+
+            } catch {
+                print("Failed to create/send csv file")
+                print("\(error)")
+            }
+        }
+        
+        // update ui and state
         let leftAddBarButtonItem = UIBarButtonItem(title: "\(loggingThreadReadings ? "Start" : "Stop") Logging", style: UIBarButtonItem.Style.plain, target: self, action: #selector(ViewController.loggingToggleHandler))
+        
         navigationItem.setLeftBarButton(leftAddBarButtonItem, animated: true)
         loggingThreadReadings = !loggingThreadReadings
 
@@ -134,11 +160,18 @@ extension ViewController: CBCentralManagerDelegate {
             print("Powered On")
 
             // helper function (1/2) call for finding the UUID for a new user
-            // centralManager.scanForPeripherals(withServices: [], options: nil) // CBUUID.init(nsuuid: uuid!)
-            peripheralList = centralManager.retrievePeripherals(withIdentifiers: [uuid!])
+//            centralManager.scanForPeripherals(withServices: [], options: nil) // CBUUID.init(nsuuid: uuid!)
+
+            let serviceCBUUID = CBUUID(string: "D45C2000-4270-A125-A25D-EE458C085001")
+            peripheralList = centralManager.retrieveConnectedPeripherals(withServices: [serviceCBUUID])
             peripheralObject = peripheralList[0]
             peripheralObject.delegate = self
             centralManager.connect(peripheralObject, options: nil)
+            
+//            peripheralList = centralManager.retrievePeripherals(withIdentifiers: [uuid!])
+//            peripheralObject = peripheralList[0]
+//            peripheralObject.delegate = self
+//            centralManager.connect(peripheralObject, options: nil)
         case .poweredOff:
             print("Powered Off")
         }
@@ -146,7 +179,7 @@ extension ViewController: CBCentralManagerDelegate {
 
     // helper function (2/2) for finding the UUID for a new user
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
-        print("UUID(s) found: \(peripheral.name) - \(peripheral.identifier.uuidString)")
+        print("Found: \(peripheral.name) - \(peripheral.identifier.uuidString)")
     }
 
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
@@ -162,12 +195,43 @@ extension ViewController: CBCentralManagerDelegate {
 
 }
 
-extension ViewController: MFMessageComposeViewControllerDelegate {
+extension ViewController: MFMailComposeViewControllerDelegate {
 
-    func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
-        self.dismiss(animated: true, completion: nil)
+    func mailComposeController(controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: NSError?) {
+        controller.dismiss(animated: true, completion: nil)
+
     }
+    
+    func sendMail(dataURL: URL) {
+        if( MFMailComposeViewController.canSendMail()) {
+            print("Sending CSV Data to Team 11 Slack!")
+            let mailComposerVC = MFMailComposeViewController()
 
+            mailComposerVC.setSubject(NSDate().description)
+            mailComposerVC.setToRecipients(["v3g9z9p3g6p2u4l8@cs4605group.slack.com"])
+            mailComposerVC.setMessageBody("Thread Pressure Readings Raw Data Collection", isHTML: false)
+            
+            do {
+                try mailComposerVC.addAttachmentData(NSData(contentsOf: dataURL, options: NSData.ReadingOptions.mappedRead) as Data, mimeType: "text/csv", fileName: "data.csv")
+            } catch {
+                print("Couldn't Attach Data CSV")
+            }
+            self.present(mailComposerVC, animated: true, completion: nil)
+            
+            //     emailController.addAttachmentData(NSData(contentsOfFile: "YourFile")!, mimeType: "text/csv", fileName: "Sample.csv")
+
+        } else {
+            showMailError()
+        }
+    }
+    
+    func showMailError() {
+        let sendMailErrorAlert = UIAlertController(title: "Could not send email", message: "Your device could not send email", preferredStyle: .alert)
+        let dismiss = UIAlertAction(title: "Ok", style: .default, handler: nil)
+        sendMailErrorAlert.addAction(dismiss)
+        self.present(sendMailErrorAlert, animated: true, completion: nil)
+    }
+    
 }
 
 extension ViewController: CBPeripheralDelegate {
@@ -240,7 +304,13 @@ extension ViewController: CBPeripheralDelegate {
         let fullStr = characteristicData.hexEncodedString()
         let partStr = fullStr[20...35]
         if self.loggingThreadReadings {
-            print(partStr)
+//            print(partStr)
+//            for c in partStr {
+//                csvText.append("\(UInt8(String(c), radix: 16)),")
+//            }
+//            csvText.append("\n")
+            csvText.append("\(partStr)\n")
+            
         }
         return partStr
     }
