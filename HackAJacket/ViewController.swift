@@ -13,6 +13,7 @@ import PureLayout
 import SwiftyButton
 import MessageUI
 import MediaPlayer
+import CoreML
 
 class ViewController: UIViewController {
     
@@ -32,9 +33,28 @@ class ViewController: UIViewController {
     var loggingThreadReadings = false
     var glowCharacteristic: CBCharacteristic!
     var csvText = "ThreadReading"
+    let model = NewGestureClassifier_RC2()
+    let input_data_dim = 675
+    let numThreads = 15
+    var hexArr: [Character] = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F"]
+    var hexToInt = [Character: NSNumber]()
+    var threadReadings = "000000000000000";
+    var input_data: MLMultiArray? = nil;
+    
+    // TODO: use input_data_dim instead of 675
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        for (index, value) in hexArr.enumerated() {
+            hexToInt[value] = NSNumber(value: Float(index) / Float(15))
+        }
+        
+        do {
+            input_data = try MLMultiArray(shape:[675], dataType:MLMultiArrayDataType.double);
+        } catch {
+            fatalError("Unexpected runtime error. MLMultiArray");
+        }
 
         navigationItem.title = HAJString.hajTitle
 
@@ -179,7 +199,7 @@ extension ViewController: CBCentralManagerDelegate {
 
     // helper function (2/2) for finding the UUID for a new user
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
-        print("Found: \(peripheral.name) - \(peripheral.identifier.uuidString)")
+        print("Found: \(String(describing: peripheral.name)) - \(peripheral.identifier.uuidString)")
     }
 
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
@@ -264,15 +284,62 @@ extension ViewController: CBPeripheralDelegate {
     }
 
     func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
-            // some async process?
-            DispatchQueue.main.async() {
-                if characteristic.uuid.uuidString == "D45C2010-4270-A125-A25D-EE458C085001" {
-                    self.label.text = self.findThread(from: characteristic)
-                }
-            }
+            // get live thread readings, format into mlmultiarray and feed into classifier
+            // if new gesture, update label and terminate/sleep for t ms, else use decodeGesture(...)
+//            let threadReadings = self.findThread(from: characteristic)
+            // convert into mlmultiarray
+            // feed into classifier
+            // if forceTouch
+
         
-            if !seeThreads {
-                // print decoded/identified gestures
+        if seeThreads {
+            // some async process?
+//            DispatchQueue.main.async() {
+                if characteristic.uuid.uuidString == "D45C2010-4270-A125-A25D-EE458C085001" {
+                    threadReadings = self.findThread(from: characteristic)
+                    self.label.text = threadReadings
+                    
+                    for i in 0 ..< (input_data_dim - numThreads) {
+                        input_data![i] = input_data![i + numThreads]
+                    }
+                    for i in 0 ..< numThreads {
+                        let ch = threadReadings[threadReadings.index(threadReadings.startIndex, offsetBy: i)]
+                        input_data![input_data_dim - numThreads + i] = hexToInt[ch] ?? 0
+                    }
+                    
+                    
+                    let prediction = try? model.prediction(input: NewGestureClassifier_RC2Input(_15ThreadConductivityReadings: input_data!))
+                    print("ForceTouch \((prediction?.output["ForceTouch"])!)")
+//                    TODO: gather enough training data/tune model such that we are at least 50% confident (0.5)
+//                          such that the actual predicted label prediction?.classLabel is forcetouch!
+                    if ((prediction?.output["ForceTouch"])! > 0.2) {
+                        self.label.text = "ForceTouch"
+                        // pause and check
+                        print("recognized* Forcetouch!")
+                        
+                    }
+                    
+                    
+                }
+//            }
+            
+        } else {
+            // print decoded/identified gestures
+            
+//            for i in 0 ..< (input_data_dim - numThreads) {
+//                input_data![i] = input_data![i + numThreads]
+//            }
+//            for i in 0 ..< numThreads {
+//                let ch = threadReadings[threadReadings.index(threadReadings.startIndex, offsetBy: i)]
+//                input_data![input_data_dim - numThreads + i] = hexToInt[ch] ?? 0
+//            }
+//
+//
+//            let prediction = try? model.prediction(input: NewGestureClassifier_RC2Input(_15ThreadConductivityReadings: input_data!))
+////            print(prediction?.classLabel)
+//            if (prediction?.classLabel == "ForceTouch ") {
+//                label.text = "ForceTouch"
+//            } else {
                 let gestureString = decodeGesture(from: characteristic)
                 label.text = gestureString
                 
@@ -280,7 +347,11 @@ extension ViewController: CBPeripheralDelegate {
                 if gestureString == HAJString.hajGestureUndefined {
                     self.glowTag()
                 }
-            }
+//            }
+            
+        }
+        
+    
     }
 
     func dataWithHexString(hex: String) -> Data {
@@ -302,15 +373,9 @@ extension ViewController: CBPeripheralDelegate {
     private func findThread(from characteristic: CBCharacteristic) -> String {
         guard let characteristicData = characteristic.value else { return "Error" }
         let fullStr = characteristicData.hexEncodedString()
-        let partStr = fullStr[20...35]
+        let partStr = fullStr[21...35]
         if self.loggingThreadReadings {
-//            print(partStr)
-//            for c in partStr {
-//                csvText.append("\(UInt8(String(c), radix: 16)),")
-//            }
-//            csvText.append("\n")
             csvText.append("\(partStr)\n")
-            
         }
         return partStr
     }

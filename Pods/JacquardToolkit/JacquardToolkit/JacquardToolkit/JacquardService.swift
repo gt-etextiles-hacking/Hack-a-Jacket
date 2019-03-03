@@ -15,6 +15,7 @@ public protocol JacquardServiceDelegate: NSObjectProtocol {
     func didDetectBrushOutGesture()
     func didDetectCoverGesture()
     func didDetectScratchGesture()
+    func didDetectUndefinedGesture()
 }
 
 public class JacquardService: NSObject, CBCentralManagerDelegate {
@@ -134,6 +135,8 @@ extension JacquardService: CBPeripheralDelegate {
             delegate?.didDetectCoverGesture()
         case .scratch:
             delegate?.didDetectScratchGesture()
+        case .undefined:
+            delegate?.didDetectUndefinedGesture()
         default:
             NSLog("Detected an unknown gesture with characteristic: \(characteristic.uuid.uuidString)")
         }

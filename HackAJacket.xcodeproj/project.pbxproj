@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0D187D22C15D6555544559B7 /* Pods_HackAJacket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F4EBD44518CF4AAE782348F /* Pods_HackAJacket.framework */; };
+		4568D4F0222C8602005CE910 /* NewGestureClassifier_RC2.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 4568D4EF222C8602005CE910 /* NewGestureClassifier_RC2.mlmodel */; };
 		8222F924219CC9B000513426 /* HAJString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8222F923219CC9B000513426 /* HAJString.swift */; };
 		82289753217E256B004A2000 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82289752217E256B004A2000 /* AppDelegate.swift */; };
 		82289755217E256B004A2000 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82289754217E256B004A2000 /* ViewController.swift */; };
@@ -19,6 +20,7 @@
 
 /* Begin PBXFileReference section */
 		3F4EBD44518CF4AAE782348F /* Pods_HackAJacket.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HackAJacket.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4568D4EF222C8602005CE910 /* NewGestureClassifier_RC2.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = NewGestureClassifier_RC2.mlmodel; sourceTree = "<group>"; };
 		8222F923219CC9B000513426 /* HAJString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HAJString.swift; sourceTree = "<group>"; };
 		8228974F217E256B004A2000 /* HackAJacket.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HackAJacket.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		82289752217E256B004A2000 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -64,6 +66,7 @@
 		82289746217E256B004A2000 = {
 			isa = PBXGroup;
 			children = (
+				4568D4EF222C8602005CE910 /* NewGestureClassifier_RC2.mlmodel */,
 				82289751217E256B004A2000 /* HackAJacket */,
 				82289750217E256B004A2000 /* Products */,
 				589999C46F4552668D489649 /* Pods */,
@@ -218,6 +221,7 @@
 				82719B3B2187828E007CA098 /* HAJColor.swift in Sources */,
 				82289755217E256B004A2000 /* ViewController.swift in Sources */,
 				8228975B217E256B004A2000 /* HackAJacket.xcdatamodeld in Sources */,
+				4568D4F0222C8602005CE910 /* NewGestureClassifier_RC2.mlmodel in Sources */,
 				82289753217E256B004A2000 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
