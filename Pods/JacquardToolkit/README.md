@@ -1,6 +1,6 @@
 # JacquardToolkit
 
-JacquardToolkit is a iOS frameowork to enable developers to develop their own applications using their Levi's Jacquard...
+JacquardToolkit is a iOS frameowork to enable developers to develop their own applications using their Levi's Jacquard Technology...
 
 # New Features
 
@@ -13,7 +13,7 @@ JacquardToolkit is a iOS frameowork to enable developers to develop their own ap
 
 JacquardToolkit is currently only availible as a Cocoapod.
 
-1. Add a pod entry for JacquardToolkit to your Podfile: 
+1. Add a pod entry for JacquardToolkit to your Podfile:
 ```sh
 pod 'JacquardToolkit'
 ```
@@ -28,7 +28,7 @@ import JacquardToolkit
 
 ### Development
 
-1. Enable your device's bluetooth capabilities and connect to your jacket by passing in your jacket's UUID: 
+1. Enable your device's bluetooth capabilities and connect to your jacket by passing in your jacket's UUID:
 ```sh
 import UIKit
 import JacquardToolkit
@@ -36,21 +36,21 @@ import JacquardToolkit
 class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        JacquardService.shared.activateBlutooth { _ in 
+        JacquardService.shared.activateBlutooth { _ in
             JacquardService.shared.connectToJacket(uuidString: YourJacketsUUIDString)
         }
     }
 }
 ```
 
-3. Send a colorful rainbow glow to your jacket: 
+3. Send a colorful rainbow glow to your jacket:
 ```sh
 @IBAction func glowButtonTapped(_ sender: Any) {
     JacquardService.shared.rainbowGlowJacket()
 }
 ```
 
-4. Use the JacquardServiceDelegate to react to all of the user gestures (including Double Tap, Brush In, Brush Out, Cover, & Scratch: 
+4. Use the JacquardServiceDelegate to react to all of the user gestures (including Double Tap, Brush In, Brush Out, Cover, & Scratch:
 ```sh
 override func viewDidLoad() {
     super.viewDidLoad()

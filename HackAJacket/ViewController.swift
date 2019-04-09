@@ -299,9 +299,12 @@ extension ViewController: CBPeripheralDelegate {
                     threadReadings = self.findThread(from: characteristic)
                     self.label.text = threadReadings
                     
+                    // shifting left by (15) numthreads
                     for i in 0 ..< (input_data_dim - numThreads) {
                         input_data![i] = input_data![i + numThreads]
                     }
+                    
+                    // copying in the latest thread reading into the last 15 elements
                     for i in 0 ..< numThreads {
                         let ch = threadReadings[threadReadings.index(threadReadings.startIndex, offsetBy: i)]
                         input_data![input_data_dim - numThreads + i] = hexToInt[ch] ?? 0
